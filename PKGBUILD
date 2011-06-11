@@ -1,29 +1,29 @@
 # Maintainer: Steven Merrill <steven.merrill@gmail.com>
 
-pkgname=handlersocket-mysql
+pkgname=handlersocket-mysql-git
 pkgver=20110611
 pkgrel=1
 pkgdesc="A high-performance interface to MySQL's InnoDB read/write threads."
 arch=('i686' 'x86_64')
 
-depends=('mysql-clients mysql')
+depends=('mysql-clients mysql git')
+provides=('handlersocket')
+conflicts=('handlersocket')
 #optdepends=('perl-dbi' 'perl-dbd-mysql')
 makedepends=('cmake' 'openssl' 'tcp_wrappers' 'zlib')
 
-license=('GPL')
+license=('BSD')
 url="https://github.com/ahiguti/HandlerSocket-Plugin-for-MySQL"
 options=('!libtool')
 #backup=('etc/mysql/my.cnf')
-install=handlersocket.install
+#install=handlersocket.install
 
 _mysqlpkgver=5.5.13
 _gitroot="https://github.com/ahiguti/HandlerSocket-Plugin-for-MySQL"
-_gitname=${pkgname}
+_gitname="handlersocket"
 
-source=("http://ftp.gwdg.de/pub/misc/mysql/Downloads/MySQL-5.5/mysql-${_mysqlpkgver}.tar.gz"
-        "handlersocket.install")
-md5sums=('f0e519e90ee7c00fceb0730edf859d7b'
-         'b7a138323938a9a8028661aff7f34465')
+source=("http://ftp.gwdg.de/pub/misc/mysql/Downloads/MySQL-5.5/mysql-${_mysqlpkgver}.tar.gz")
+md5sums=('f0e519e90ee7c00fceb0730edf859d7b')
 
 build() {
   cd ${srcdir}
@@ -40,7 +40,7 @@ build() {
   msg "Starting make..."
 
   rm -rf ${srcdir}/${_gitname}-build
-  git clone ${srcdir}/${_gitname} ${srcdir}/${_gitname-build}
+  git clone ${srcdir}/${_gitname} ${srcdir}/${_gitname}-build
   cd ${srcdir}/${_gitname}-build
 
   ./autogen.sh
@@ -53,7 +53,9 @@ package() {
 
   make DESTDIR=${pkgdir} install
 
-  #license
+  #Extract the BSD license clause from the README.
+  sed -n -e'1p;2,/^--/p' README > LICENSE
+
   install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
 }
 
