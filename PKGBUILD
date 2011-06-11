@@ -6,15 +6,15 @@ pkgrel=1
 pkgdesc="A high-performance interface to MySQL's InnoDB read/write threads."
 arch=('i686' 'x86_64')
 
-depends=('mysql-clients mysql git')
+depends=('mysql-clients' 'mysql' 'git')
 provides=('handlersocket')
 conflicts=('handlersocket')
 #optdepends=('perl-dbi' 'perl-dbd-mysql')
-makedepends=('cmake' 'openssl' 'tcp_wrappers' 'zlib')
+#makedepends=('cmake' 'openssl' 'tcp_wrappers' 'zlib')
 
 license=('BSD')
 url="https://github.com/ahiguti/HandlerSocket-Plugin-for-MySQL"
-options=('!libtool')
+#options=('!libtool')
 #backup=('etc/mysql/my.cnf')
 #install=handlersocket.install
 
