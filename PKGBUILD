@@ -16,16 +16,16 @@ license=('BSD')
 url="https://github.com/ahiguti/HandlerSocket-Plugin-for-MySQL"
 #options=('!libtool')
 #backup=('etc/mysql/my.cnf')
-install=handlersocket.install
+install="handlersocket-mysql-git.install"
 
 _mysqlpkgver=5.5.13
 _gitroot="https://github.com/ahiguti/HandlerSocket-Plugin-for-MySQL"
 _gitname="handlersocket"
 
 source=("http://ftp.gwdg.de/pub/misc/mysql/Downloads/MySQL-5.5/mysql-${_mysqlpkgver}.tar.gz"
-        "handlersocket.install")
+        "handlersocket-mysql-git.install")
 md5sums=('f0e519e90ee7c00fceb0730edf859d7b'
-         '34e80c9b7a86ae6446ab61ee5a5e79ea')
+         'e9461cb3b215de91d2e86691261358be')
 
 build() {
   cd ${srcdir}
